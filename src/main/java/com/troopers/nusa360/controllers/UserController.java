@@ -76,15 +76,21 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(
+    public ResponseEntity<?> updateUser(
             @PathVariable(name = "id") Long id,
-            @RequestBody UpdateUserRequest request
+            @Valid @RequestBody UpdateUserRequest request
             ){
 
         var user = userRepository.findById(id).orElse(null);
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
+
+        if (userRepository.existsByEmail(request.getEmail())){
+            return ResponseEntity.badRequest().body(
+                    Map.of("email", "Email is already registered" )
+            );
+        };
 
         userMapper.updateUser(request, user);
         userRepository.save(user);
@@ -106,7 +112,7 @@ public class UserController {
     @PostMapping("/{id}/change-password")
     public ResponseEntity<Void> changePassword(
             @PathVariable(name = "id") Long id,
-            @RequestBody ChangePasswordRequest request
+            @Valid @RequestBody ChangePasswordRequest request
     ){
         var user = userRepository.findById(id).orElse(null);
         if (user == null) {
