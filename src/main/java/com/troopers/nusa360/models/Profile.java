@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Getter
-@ToString
 @Setter
 @Entity
 @Table(name = "profiles")
