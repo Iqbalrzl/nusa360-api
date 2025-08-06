@@ -1,0 +1,2 @@
+ALTER TABLE Users
+    ADD CONSTRAINT UQ_Users_Email UNIQUE (email);
