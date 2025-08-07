@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -21,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //Limit Top 5 Search and Sort By Username (Ascending)
     List<User> findTop5ByUsernameOrderByUsernameAsc(String username);
     //Search By Email
-    List<User> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     //--USERDTO--
     //Search By Username
