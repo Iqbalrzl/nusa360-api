@@ -17,7 +17,14 @@ spring:
   servlet:
     multipart:
       max-file-size: 5MB
+      max-request-size: 30MB
   file:
     upload:
       public: uploads/public # for prod use /var/www/myapp/uploads/public
       private: uploads/private # for prod use /var/www/myapp/uploads/private
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
