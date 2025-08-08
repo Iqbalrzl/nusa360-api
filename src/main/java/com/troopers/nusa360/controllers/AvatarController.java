@@ -17,7 +17,7 @@ public class AvatarController {
     public String handleUserQuery(String query) throws Exception {
 
         System.out.println("Receiving Questions: " + query);
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
 
         String aiReply = aiService.chat(query);
 

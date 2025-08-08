@@ -22,6 +22,5 @@ public class Profile {
     @OneToOne
     @JoinColumn(name = "id")
     @MapsId
-    @ToString.Exclude
     private User user;
 }

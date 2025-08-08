@@ -3,9 +3,12 @@ package com.troopers.nusa360.controllers;
 import com.troopers.nusa360.config.JwtConfig;
 import com.troopers.nusa360.dtos.JwtResponse;
 import com.troopers.nusa360.dtos.LoginRequest;
+import com.troopers.nusa360.dtos.RegisterUserRequest;
 import com.troopers.nusa360.dtos.UserDto;
 import com.troopers.nusa360.mappers.UserMapper;
+import com.troopers.nusa360.models.Profile;
 import com.troopers.nusa360.models.User;
+import com.troopers.nusa360.repositories.ProfileRepository;
 import com.troopers.nusa360.repositories.UserRepository;
 import com.troopers.nusa360.services.JwtService;
 import jakarta.servlet.http.Cookie;
@@ -21,6 +24,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -28,6 +34,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
@@ -71,20 +78,38 @@ public class AuthController {
         return jwtService.validateToken(token);
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(
+            @Valid @RequestBody RegisterUserRequest request,
+            UriComponentsBuilder uriBuilder) {
+
+        if (userRepository.existsByEmail(request.getEmail())){
+            return ResponseEntity.badRequest().body(
+                    Map.of("email", "Email is already registered" )
+            );
+        }
+
+        var user = userMapper.toEntity(request);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+
+        var profile = new Profile();
+        profile.setAvatar_url(null);
+        profile.setUser(user);
+        profileRepository.save(profile);
+
+
+        var userDto = userMapper.toUserDto(user);
+        var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(userDto);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(
             @Valid @RequestBody LoginRequest request,
             HttpServletResponse response
     ) {
-
-//        If not using Authentication Manager
-//        var user =  userRepository.findByEmail(request.getEmail()).orElse(null);
-//        if (user == null){
-//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//        }
-//        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())){
-//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//        };
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

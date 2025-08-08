@@ -14,3 +14,10 @@ spring:
   ai:
     openai:
       api-key: ${OPEN_AI_KEY}
+  servlet:
+    multipart:
+      max-file-size: 5MB
+  file:
+    upload:
+      public: uploads/public # for prod use /var/www/myapp/uploads/public
+      private: uploads/private # for prod use /var/www/myapp/uploads/private

@@ -6,10 +6,8 @@ import lombok.Data;
 
 @Data
 public class UpdateUserRequest {
-    @NotBlank(message = "Username is required")
     private String username;
 
-    @NotBlank(message = "Email is required")
     @Email(message = "Email must be valid")
     private String email;
 }

@@ -5,6 +5,8 @@ import com.troopers.nusa360.dtos.RegisterUserRequest;
 import com.troopers.nusa360.dtos.UpdateUserRequest;
 import com.troopers.nusa360.dtos.UserDto;
 import com.troopers.nusa360.mappers.UserMapper;
+import com.troopers.nusa360.models.Profile;
+import com.troopers.nusa360.repositories.ProfileRepository;
 import com.troopers.nusa360.repositories.UserRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ import java.util.Set;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -71,6 +74,12 @@ public class UserController {
         var user = userMapper.toEntity(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+
+        var profile = new Profile();
+        profile.setAvatar_url(null);
+        profile.setUser(user);
+        profileRepository.save(profile);
+
 
         var userDto = userMapper.toUserDto(user);
         var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
