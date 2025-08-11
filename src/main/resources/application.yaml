@@ -1,12 +1,6 @@
 spring:
   application:
     name: Nusa360
-  datasource:
-    url: jdbc:mysql://localhost:3306/nusa?createDatabaseIfNotExist=true
-    username: root
-    password:
-  jpa:
-    show-sql: true
   jwt:
     secret: ${JWT_SECRET}
     accessTokenExpiration: 86400 # 1 day
@@ -18,13 +12,13 @@ spring:
     multipart:
       max-file-size: 5MB
       max-request-size: 30MB
-  file:
-    upload:
-      public: uploads/public # for prod use /var/www/myapp/uploads/public
-      private: uploads/private # for prod use /var/www/myapp/uploads/private
+  profiles:
+    active: dev
 server:
   servlet:
     encoding:
       charset: UTF-8
       enabled: true
       force: true
+  port: 8080
+  address: 0.0.0.0

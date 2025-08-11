@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  file:
+    upload:
+      public: ${SPRING_FILE_UPLOAD_PUBLIC}
+      private: ${SPRING_FILE_UPLOAD_PRIVATE}
+
