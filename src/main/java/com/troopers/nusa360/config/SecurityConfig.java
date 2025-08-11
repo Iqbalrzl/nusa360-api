@@ -58,10 +58,18 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Allow from All Origin (Development)
-        configuration.setAllowedOriginPatterns(List.of("*"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedOriginPatterns(List.of(
+                "*"
+        ));
+
+        configuration.setAllowedMethods(List.of(
+                "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"
+        ));
+
+        configuration.setAllowedHeaders(List.of(
+                "*"
+        ));
+
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -74,21 +82,26 @@ public class SecurityConfig {
         // Stateless sessions (token based authentication)
         // Disable CSRF
         // Authorize
-
         http
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .sessionManagement(c ->
                         c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(c -> c
-                        .requestMatchers(HttpMethod.POST,"/users").permitAll()
+                        .requestMatchers("/ws-nusa360").permitAll()
+                        .requestMatchers("/ws-nusa360/**").permitAll()
+                        .requestMatchers("/", "/index.html").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/validate").permitAll()
                         .requestMatchers(HttpMethod.POST,"/auth/refresh").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/uploads/**").permitAll()
-                        .requestMatchers("/ws-nusa360/**").permitAll()
-                        .requestMatchers("/ws-nusa360").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/uploads/public").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/uploads/public/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/opt/nusa360/uploads/public").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/opt/nusa360/uploads/public/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

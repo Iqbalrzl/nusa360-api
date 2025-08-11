@@ -1,11 +1,997 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nusa360 - Platform Budaya dan Pariwisata Indonesia</title>
+
+    Google Fonts
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    Font Awesome for Icons
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #C44B4B;
+            --background-color: #F8F5F2;
+            --text-primary: #2C2C2C;
+            --text-secondary: #555555;
+            --white: #FFFFFF;
+            --navbar-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(248, 245, 242, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            height: var(--navbar-height);
+            display: flex;
+            align-items: center;
+        }
+
+        nav.scrolled {
+            background: rgba(248, 245, 242, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Video Hero Section */
+        .video-hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .video-container iframe {
+            width: 100vw;
+            height: 56.25vw; /* 16:9 aspect ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 16:9 aspect ratio */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-content {
+            text-align: center;
+            color: white;
+            z-index: 3;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .video-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-content p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .video-content {
+                padding: 1rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            padding: calc(var(--navbar-height) + 2rem) 2rem 4rem 2rem;
+            background: linear-gradient(135deg, var(--background-color) 0%, #f0ebe6 100%);
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 0;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 500px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .hero-video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding: calc(var(--navbar-height) + 1rem) 1rem 3rem 1rem;
+                min-height: calc(100vh - var(--navbar-height));
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-video {
+                height: 250px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+                margin-bottom: 1.5rem;
+            }
+
+            .hero p {
+                font-size: clamp(0.9rem, 4vw, 1.1rem);
+            }
+        }
+
+        /* Maestro Section */
+        .maestro-section {
+            background: linear-gradient(135deg, var(--background-color) 0%, #f0ebe6 100%);
+            padding: 6rem 2rem;
+        }
+
+        .maestro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 4rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .maestro-card {
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+        }
+
+        .maestro-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .maestro-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .maestro-image-fullscreen {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .maestro-image-fullscreen img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, #f8f5f2 0%, #f0ebe6 100%);
+        }
+
+        .maestro-card:hover .maestro-image-fullscreen img {
+            transform: scale(1.05);
+        }
+
+        .maestro-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .maestro-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .maestro-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .maestro-description {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .maestro-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .maestro-intro p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .maestro-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                min-width: auto;
+            }
+
+            .maestro-image-fullscreen {
+                height: 400px;
+            }
+
+            .maestro-overlay {
+                padding: 2rem;
+            }
+
+            .maestro-name {
+                font-size: 2.5rem;
+            }
+
+            .maestro-title {
+                font-size: 1.1rem;
+            }
+
+            .maestro-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--text-primary);
+        }
+
+        /* Team Section - New Design */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card-new {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .team-card-new.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-card-new:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-photo-large {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .team-photo-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .team-card-new:hover .team-photo-large img {
+            transform: scale(1.05);
+        }
+
+        .team-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .team-overlay h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .team-overlay h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .team-overlay .affiliation {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .social-links-team {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links-team a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .social-links-team a:hover {
+            color: var(--primary-color);
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        /* Technology Pillars */
+        .tech-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .pillar {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .pillar:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .pillar-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .pillar h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* API Section */
+        #api {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .api-section {
+            text-align: center;
+            background: var(--white);
+            margin: 0 auto;
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+        }
+
+        .api-section .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: clamp(2rem, 4vw, 3rem);
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .api-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ghost-button {
+            display: inline-block;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Roadmap */
+        .roadmap {
+            margin-top: 3rem;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            color: var(--background-color);
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--background-color);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .tech-pillars {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                flex-direction: column;
+            }
+
+            .timeline::before {
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 2px;
+                height: auto;
+            }
+
+            .timeline-item::before {
+                top: 50%;
+                left: -8px;
+                transform: translateY(-50%);
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
- <h1>NUSA360 API</h1>
+Navigation
+<nav id="navbar">
+    <div class="nav-container">
+        <div class="logo">Nusa360</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Beranda</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#maestro">Maestro</a></li>
+            <li><a href="#team">Tim</a></li>
+            <li><a href="#technology">Teknologi</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#api">API</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!--Hero Section-->
+<section id="hero" class="hero">
+    <div class="hero-content">
+        <h1>Nusa360: Saat Budaya Bernapas dan Teknologi Bicara</h1>
+        <p>Nusa360 bukan sekadar platform, ini adalah sebuah gebrakan. Kami membangun ekosistem digital di Indonesia yang menyatukan kekayaan pariwisata dan keagungan budaya melalui Artificial Intelligence (AI) dan Extended Reality (XR). Bersiaplah untuk berinteraksi dengan maestro budaya virtual, menjelajahi situs warisan dalam dunia imersif, dan menemukan kembali cerita-cerita yang membentuk bangsa ini. Ini adalah masa depan pariwisata. Selamat datang di Nusa360.</p>
+    </div>
+    <div class="hero-image">
+        <img src="/opt/nusa360/uploads/public/hero.jpg" alt="Nusa360 Vision" />
+    </div>
+</section>
+
+<!--Video Hero Section-->
+<section id="video" class="video-hero">
+    <div class="video-container">
+        <iframe
+                src="https://www.youtube.com/embed/VRSDR7zCpHQ?autoplay=1&mute=1&loop=1&playlist=VRSDR7zCpHQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+                title="Nusa360 Demo Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+    </div>
+    <div class="video-overlay">
+        <div class="video-content">
+            <h1>Nusa360</h1>
+            <p></p>
+        </div>
+    </div>
+</section>
+
+<!--Maestro Section-->
+<section id="maestro" class="maestro-section">
+    <h2 class="section-title">Bertemu Sang Maestro AI</h2>
+    <div class="maestro-intro">
+        <p>Kenalkan dua maestro budaya virtual yang akan memandu perjalanan Anda menjelajahi kekayaan Nusantara. Mereka adalah penjaga cerita, pewaris tradisi, dan pemandu wisata digital yang siap berbagi pengetahuan mendalam tentang budaya Indonesia.</p>
+    </div>
+    <div class="maestro-grid">
+        <div class="maestro-card">
+            <div class="maestro-image-fullscreen">
+                <img src="/opt/nusa360/uploads/public/tara.png" alt="Tara - Maestro Budaya Danau Toba" />
+                <div class="maestro-overlay">
+                    <h3 class="maestro-name">TARA</h3>
+                    <h4 class="maestro-title">Maestro Budaya Danau Toba</h4>
+                    <p class="maestro-description">
+                        Penjaga tradisi Batak yang bijaksana, Tara akan memandu Anda menjelajahi keagungan Danau Toba. Dari cerita legenda Samosir hingga filosofi Dalihan Na Tolu, ia siap berbagi kearifan leluhur Batak.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="maestro-card">
+            <div class="maestro-image-fullscreen">
+                <img src="/opt/nusa360/uploads/public/jojo.png" alt="Jojo - Maestro Budaya Labuan Bajo" />
+                <div class="maestro-overlay">
+                    <h3 class="maestro-name">JOJO</h3>
+                    <h4 class="maestro-title">Maestro Budaya Labuan Bajo</h4>
+                    <p class="maestro-description">
+                        Sang penjelajah dari tanah Flores, Jojo akan mengajak Anda menyelami misteri Komodo dan keindahan Labuan Bajo. Dari ritual adat Manggarai hingga legenda naga purba, petualangan menanti bersama Jojo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Team Section-->
+<section id="team">
+    <h2 class="section-title">Di Balik Layar: "The Troopers"</h2>
+    <div class="team-grid">
+        <div class="team-card-new">
+            <div class="team-photo-large">
+                <img src="/opt/nusa360/uploads/public/della.jpg" alt="Nadiella Fitantriani Putri" />
+                <div class="team-overlay">
+                    <h3>Nadiella Fitantriani Putri</h3>
+                    <h4>Ketua Tim</h4>
+                    <p class="affiliation">Informatika, Telkom University</p>
+                    <div class="social-links-team">
+                        <a href="https://www.instagram.com/nndeeell"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/nadiella"><i class="fab fa-github"></i></a>
+                        <a href="http://www.linkedin.com/in/nadiellafitantriani"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="team-card-new">
+            <div class="team-photo-large">
+                <img src="/opt/nusa360/uploads/public/iqbal.jpg" alt="Muhamad Iqbal Rizaldy" />
+                <div class="team-overlay">
+                    <h3>Muhamad Iqbal Rizaldy</h3>
+                    <h4>Anggota</h4>
+                    <p class="affiliation">Informatika, Telkom University</p>
+                    <div class="social-links-team">
+                        <a href="https://www.instagram.com/iqbaalrzl"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/Iqbalrzl"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/iqbaalrzl/"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="team-card-new">
+            <div class="team-photo-large">
+                <img src="/opt/nusa360/uploads/public/rheno.jpg" alt="Rheno Febrian Cholistyo" />
+                <div class="team-overlay">
+                    <h3>Rheno Febrian Cholistyo</h3>
+                    <h4>Anggota</h4>
+                    <p class="affiliation">Informatika, Telkom University</p>
+                    <div class="social-links-team">
+                        <a href="https://www.instagram.com/rhenofbrn"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/rhenofebrian"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/rhenofebrian/"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="team-card-new">
+            <div class="team-photo-large">
+                <img src="/opt/nusa360/uploads/public/rio.jpg" alt="Rio Nurtantyana" />
+                <div class="team-overlay">
+                    <h3>Rio Nurtantyana, S.Pd., M.Pd., M.Sc., Ph.D</h3>
+                    <h4>Dosen Pembimbing</h4>
+                    <p class="affiliation">Peneliti di Badan Riset dan Inovasi Nasional (BRIN)</p>
+                    <div class="social-links-team">
+                        <a href="https://www.instagram.com/akunerio/"><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/akunerio/"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Technology Pillars-->
+<section id="technology">
+    <h2 class="section-title">Pilar Teknologi Kami</h2>
+    <div class="tech-pillars">
+        <div class="pillar fade-in">
+            <div class="pillar-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h3>AI Maestro</h3>
+            <p>Berinteraksi langsung dengan tokoh-tokoh budaya legendaris melalui kecerdasan buatan yang canggih. Rasakan pengalaman berdialog dengan para maestro yang telah membentuk sejarah Indonesia.</p>
+        </div>
+        <div class="pillar fade-in">
+            <div class="pillar-icon">
+                <i class="fas fa-vr-cardboard"></i>
+            </div>
+            <h3>Dunia Virtual XR</h3>
+            <p>Jelajahi situs-situs bersejarah dan destinasi wisata dalam pengalaman imersif yang memukau. Teknologi Extended Reality membawa Anda langsung ke jantung kebudayaan Nusantara.</p>
+        </div>
+    </div>
+</section>
+
+<!--Roadmap-->
+<section id="roadmap">
+    <h2 class="section-title">Roadmap Kami Kedepan</h2>
+    <div class="roadmap">
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <h4>SAAT INI</h4>
+                <p>AI dan Pilot Labuan Bajo & Danau Toba</p>
+            </div>
+            <div class="timeline-item fade-in">
+                <h4>SELANJUTNYA</h4>
+                <p>Dunia Virtual dan Extended Reality</p>
+            </div>
+            <div class="timeline-item fade-in">
+                <h4>MASA DEPAN</h4>
+                <p>Integrasi Penuh Budaya dan Ekspansi Ekonomi Kreatif</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--API Section-->
+<section id="api">
+    <div class="api-section">
+        <h2 class="section-title">Untuk Para Inovator</h2>
+        <p>Kami percaya pada kekuatan kolaborasi. Nusa360 dirancang untuk dapat diperluas dan diintegrasikan. Dokumentasi API kami akan segera tersedia bagi Anda yang ingin membangun pengalaman baru di atas platform kami.</p>
+        <a href="#" class="ghost-button">LIHAT DOKUMENTASI (SEGERA HADIR)</a>
+    </div>
+</section>
+
+<!--Footer-->
+<footer>
+    <div class="footer-logo">Nusa360</div>
+    <div class="social-links">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p>&copy; 2025 Troopers - Telkom University. All Rights Reserved.</p>
+</footer>
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const animateElements = document.querySelectorAll('.fade-in, .team-card-new, .maestro-card');
+        animateElements.forEach(el => observer.observe(el));
+    });
+
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add stagger animation to team cards - update this part
+    setTimeout(() => {
+        const teamCards = document.querySelectorAll('.team-card-new');
+        teamCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('animate');
+            }, index * 200);
+        });
+    }, 500);
+</script>
 </body>
 </html>

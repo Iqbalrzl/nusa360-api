@@ -21,5 +21,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/uploads/public/**")
                 .addResourceLocations("file:" + Paths.get(directory).toAbsolutePath().normalize() + "/");
+
+        registry
+                .addResourceHandler("/opt/nusa360/uploads/public/**")
+                .addResourceLocations("file:" + Paths.get(directory).toAbsolutePath().normalize() + "/");
     }
 }
