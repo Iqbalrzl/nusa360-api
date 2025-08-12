@@ -166,6 +166,61 @@
             }
         }
 
+        /* Demo Video Section */
+        .demo-section {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .demo-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .demo-intro {
+            margin-bottom: 3rem;
+        }
+
+        .demo-intro p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .demo-video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+
+        .demo-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .demo-section {
+                padding: 4rem 1rem;
+            }
+
+            .demo-intro p {
+                font-size: 1rem;
+            }
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -736,8 +791,8 @@ Navigation
         <div class="logo">Nusa360</div>
         <ul class="nav-links">
             <li><a href="#hero">Beranda</a></li>
-            <li><a href="#video">Video</a></li>
             <li><a href="#maestro">Maestro</a></li>
+            <li><a href="#demo">Video</a></li>
             <li><a href="#team">Tim</a></li>
             <li><a href="#technology">Teknologi</a></li>
             <li><a href="#roadmap">Roadmap</a></li>
@@ -746,22 +801,11 @@ Navigation
     </div>
 </nav>
 
-<!--Hero Section-->
-<section id="hero" class="hero">
-    <div class="hero-content">
-        <h1>Nusa360: Saat Budaya Bernapas dan Teknologi Bicara</h1>
-        <p>Nusa360 bukan sekadar platform, ini adalah sebuah gebrakan. Kami membangun ekosistem digital di Indonesia yang menyatukan kekayaan pariwisata dan keagungan budaya melalui Artificial Intelligence (AI) dan Extended Reality (XR). Bersiaplah untuk berinteraksi dengan maestro budaya virtual, menjelajahi situs warisan dalam dunia imersif, dan menemukan kembali cerita-cerita yang membentuk bangsa ini. Ini adalah masa depan pariwisata. Selamat datang di Nusa360.</p>
-    </div>
-    <div class="hero-image">
-        <img src="/opt/nusa360/uploads/public/hero.jpg" alt="Nusa360 Vision" />
-    </div>
-</section>
-
 <!--Video Hero Section-->
 <section id="video" class="video-hero">
     <div class="video-container">
         <iframe
-                src="https://www.youtube.com/embed/VRSDR7zCpHQ?autoplay=1&mute=1&loop=1&playlist=VRSDR7zCpHQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+                src="https://www.youtube.com/embed/g29xC_NGi18?autoplay=1&mute=1&loop=1&playlist=g29xC_NGi18&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
                 title="Nusa360 Demo Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -772,6 +816,17 @@ Navigation
             <h1>Nusa360</h1>
             <p></p>
         </div>
+    </div>
+</section>
+
+<!--Hero Section-->
+<section id="hero" class="hero">
+    <div class="hero-content">
+        <h1>Nusa360: Saat Budaya Bernapas dan Teknologi Bicara</h1>
+        <p>Nusa360 bukan sekadar platform, ini adalah sebuah gebrakan. Kami membangun ekosistem digital di Indonesia yang menyatukan kekayaan pariwisata dan keagungan budaya melalui Artificial Intelligence (AI) dan Extended Reality (XR). Bersiaplah untuk berinteraksi dengan maestro budaya virtual, menjelajahi situs warisan dalam dunia imersif, dan menemukan kembali cerita-cerita yang membentuk bangsa ini. Ini adalah masa depan pariwisata. Selamat datang di Nusa360.</p>
+    </div>
+    <div class="hero-image">
+        <img src="/opt/nusa360/uploads/public/hero.jpg" alt="Nusa360 Vision" />
     </div>
 </section>
 
@@ -805,6 +860,25 @@ Navigation
                     </p>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Demo Video Section -->
+<section id="demo" class="demo-section">
+    <div class="demo-container">
+        <h2 class="section-title">Nusa360 di Gemastik 2025</h2>
+        <div class="demo-intro">
+            <p>Nusa360 dengan bangga berpartisipasi dalam Pagelaran Mahasiswa Nasional Bidang Teknologi Informasi dan Komunikasi (GEMASTIK) XVIII 2025 yang diselenggarakan oleh Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi melalui Balai Pengembangan Talenta Indonesia (BPTI). Sebagai bagian dari misi GEMASTIK untuk melahirkan talenta digital nasional, Nusa360 hadir sebagai solusi inovatif berbasis TIK yang menggabungkan kecerdasan buatan dengan kekayaan budaya Indonesia. Saksikan demo aplikasi yang menunjukkan bagaimana teknologi dapat menjadi jembatan untuk melestarikan dan memperkenalkan warisan budaya Nusantara kepada dunia.</p>
+        </div>
+
+        <div class="demo-video-wrapper">
+            <iframe
+                    src="https://www.youtube.com/embed/VRSDR7zCpHQ"
+                    title="Nusa360 on Gemastik 2025"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
         </div>
     </div>
 </section>
